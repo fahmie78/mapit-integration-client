@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package mapitintegration;
+
+option java_multiple_files = true;
+option java_package = "my.com.prasarana.rapidbus.mapitintegration";
+
+message RKL_Avl {
+  string dt_received = 1;
+  string dt_gps = 2;
+  float latitude = 3;
+  float longitude = 4;
+  string dir = 5;
+  float speed = 6;
+  float angle = 7;
+  string route = 8;
+  string bus_no = 9;
+  string trip_no = 10;
+  string busstop_id = 11;
+  string captain_id = 12;
+  string trip_rev_kind = 13;
+  string engine_status = 14;
+}
+
+message RespondStatus {
+  uint32 code = 1;
+  string status = 2;
+}
+
+message RequestAVL {
+  string timestamp = 1;
+}
+
+service RKL_GTFS_Realtime {
+  rpc getGtfsRealtime (RequestAVL) returns (stream RKL_Avl) {}
+}
